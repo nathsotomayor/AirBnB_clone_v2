@@ -114,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """ Create an object of any class"""
+        """ Create an object of any class """
         new_create = args.split(" ")
         cls_name = new_create[0]
 
@@ -128,26 +128,25 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[cls_name]()
 
         if len(new_create) >= 2:
+        # if len(new_create) == 3 and new_create[2]:
             for param in new_create[1:]:
                 key_name = param.split('=')[0]
                 value = param.split('=')[1]
-                if '"' in value:
+                if value[0] == '"':
                     value = value.replace('"', '')
                     value = value.replace('_', ' ')
-                    setattr(new_instance, key_name, value)
-                elif value.isdigit():
-                    setattr(new_instance, key_name, value)
-                   # value = float(value)
+                elif value.isdecimal():
+                    value = int(value)
                 else:
-                   # value = int(value)
-                    setattr(new_instance, key_name, value)
-            new_instance.save()
+                    value = float(value)
+                setattr(new_instance, key_name, value)
+            # new_instance.save()
         else:
             return
 
-        storage.save()
+        # storage.save()
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
