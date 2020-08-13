@@ -18,17 +18,13 @@ class HBNBCommand(cmd.Cmd):
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
-    classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
+    classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
                'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
+               'Review': Review}
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
-    types = {
-             'number_rooms': int, 'number_bathrooms': int,
+    types = {'number_rooms': int, 'number_bathrooms': int,
              'max_guest': int, 'price_by_night': int,
-             'latitude': float, 'longitude': float
-            }
+             'latitude': float, 'longitude': float}
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -128,7 +124,6 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[cls_name]()
 
         if len(new_create) >= 2:
-        # if len(new_create) == 3 and new_create[2]:
             for param in new_create[1:]:
                 key_name = param.split('=')[0]
                 value = param.split('=')[1]
@@ -140,9 +135,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     value = float(value)
                 setattr(new_instance, key_name, value)
-            # new_instance.save()
-        
-        # storage.save()
+
         new_instance.save()
         print(new_instance.id)
 
