@@ -34,25 +34,23 @@ class DBStorage():
 
     def all(self, cls=None):
         """Objects that depending of the class name"""
-        dictionary = {}
+        all_obj_cls = {}
         classes = [User, State, City, Amenity, Place, Review]
-        print(cls)
 
         if cls is None:
-            _query = self.__session.query(State, City).all()
+            obj_query = self.__session.query(State, City, User).all()
 
-            for obj in _query:
+            for obj in obj_query:
                 key_obj = ("{}.{}".format(obj.__class__.__name__, obj.id))
-                dictionary.update({key_obj: obj})
-            return dictionary
+                all_obj_cls.update({key_obj: obj})
+            return all_obj_cls
         else:
             if cls in classes:
-                _query = self.__session.query(cls).all()
-                print(_query)
-                for obj in _query:
+                obj_query = self.__session.query(cls).all()
+                for obj in obj_query:
                     key_obj = ("{}.{}".format(obj.__class__.__name__, obj.id))
-                    dictionary.update({key_obj: obj})
-                return dictionary
+                    all_obj_cls.update({key_obj: obj})
+                return all_obj_cls
             else:
                 return {}
 
