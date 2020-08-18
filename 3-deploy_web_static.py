@@ -7,7 +7,7 @@ import os
 
 
 env.hosts = ['35.243.244.163', '54.146.93.68']
-
+path = None
 
 
 def do_pack():
