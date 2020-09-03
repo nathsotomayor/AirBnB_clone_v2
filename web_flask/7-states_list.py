@@ -9,14 +9,14 @@ app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(self):
     """Remove current SQLAlchemy session"""
     storage.close()
 
 
 @app.route('/states_list')
 def states_list():
-    """Enables '/states_list/' route"""
+    """Enables '/states_list' route"""
     return render_template('7-states_list.html',
                            states=storage.all(State).values())
 
