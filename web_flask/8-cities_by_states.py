@@ -20,6 +20,7 @@ def states_list():
     return render_template('7-states_list.html',
                            states=storage.all(State).values())
 
+
 @app.route('/cities_by_states')
 def cities_by_states():
     """Enables '/cities_by_states' route"""
